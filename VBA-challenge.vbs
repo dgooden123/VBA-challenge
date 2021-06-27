@@ -71,7 +71,7 @@ If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
 
 'if the ticker name does not change, add the volume and keep going
 Else
-          volume = volume + Cells(i, 7).Value
+          volume = volume + ws.Cells(i, 7).Value
        End If
 
 If ws.Range("J" & i).Value >= 0 Then
@@ -84,10 +84,9 @@ ElseIf ws.Range("J" & i).Value < 0 Then
  End If
  
         Next i
-   
-   
-Next ws
 
+   
+'find the greatest decrease and decrease, and total volume
 ws.Range("Q2") = "%" & WorksheetFunction.Max(ws.Range("K2:K" & RowCount)) * 100
 ws.Range("Q3") = "%" & WorksheetFunction.Min(ws.Range("K2:K" & RowCount)) * 100
 ws.Range("Q4") = WorksheetFunction.Max(ws.Range("L2:L" & RowCount))
@@ -102,6 +101,10 @@ volume_number = WorksheetFunction.Match(WorksheetFunction.Max(ws.Range("L2:L" & 
         ws.Range("P3") = ws.Cells(decrease_number + 1, 9)
         ws.Range("P4") = ws.Cells(volume_number + 1, 9)
         
+Next ws
+
+        
 End Sub
+
 
 
